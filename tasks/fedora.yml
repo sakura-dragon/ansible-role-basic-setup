@@ -1,0 +1,13 @@
+---
+# file: basic_setup/tasks/fedora.yml
+- name: Disable dynamically configured ipv6 DNS (issues with ephemeral addresses)
+  community.general.nmcli:
+    conn_name: '{{ ansible_default_ipv4.interface }}'
+    dns6_ignore_auto: true
+    state: present
+  register: disable_ipv6_dhcp_dns_output
+  when: basic_setup_disable_ipv6
+
+- name: Restart to purge old DNS configuration
+  ansible.builtin.reboot:
+  when: disable_ipv6_dhcp_dns_output.changed
