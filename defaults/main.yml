@@ -1,3 +1,4 @@
 ---
 # Disable IPv6 on fedora hosts only
 basic_setup_disable_ipv6: false
+basic_setup_disable_apt_recommends: true
