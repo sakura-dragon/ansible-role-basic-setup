@@ -16,12 +16,12 @@
 - name: Install qemu-guest-agent
   ansible.builtin.package:
     name: qemu-guest-agent
-  when: basic_setup_is_virtual_machine|bool
+  when: ansible_virtualization_role == "guest" and ansible_virtualization_type == "kvm"
 
 - name: Enable qemu-guest-agent systemd
   ansible.builtin.systemd_service:
     name: qemu-guest-agent
     state: started
     enabled: true
-  when: basic_setup_is_virtual_machine|bool
+  when: ansible_virtualization_role == "guest" and ansible_virtualization_type == "kvm"
   ignore_errors: "{{ ansible_check_mode }}"
