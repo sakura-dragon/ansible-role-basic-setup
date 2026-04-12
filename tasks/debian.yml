@@ -34,9 +34,9 @@
     - screen
     - tmux
 
-- name: Set default locale to en_GB.UTF8
+- name: Set default locale to en_GB.UTF-8
   ansible.builtin.debconf:
     name: locales
     question: locales/default_environment_locale
-    value: en_GB.UTF8
+    value: en_GB.UTF-8
     vtype: select
